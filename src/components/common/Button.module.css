@@ -1,0 +1,16 @@
+.button {
+  padding: 0.8rem 2rem;
+  font-size: 0.9rem;
+  font-family: poppins;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+.button:active {
+  transform: scale(0.98);
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: white;
+}
