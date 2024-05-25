@@ -1,0 +1,45 @@
+.containerItems {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6rem;
+  row-gap: 4rem;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+.item {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.itemLeft {
+  text-align: right;
+  flex-direction: row;
+  
+}
+
+.item h3 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+.item p {
+  font-size: 1rem;
+  color: var(--text-white-secondary);
+  max-width: 50ch;
+}
+
+.icon {
+  border: 2px solid var(--text-white-secondary);
+  color: var(--text-white-secondary);
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

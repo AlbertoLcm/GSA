@@ -1,5 +1,16 @@
 .section {
   max-width: 72rem;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 4rem 0;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.parragraph {
+  font-size: 1rem;
+  color: var(--text-white-secondary);
+  max-width: 50ch;
 }

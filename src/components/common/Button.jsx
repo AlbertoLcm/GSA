@@ -1,11 +1,10 @@
 import styles from "./Button.module.css";
 
-function Button({ children, primary, outline, ...rest }) {
+function Button({ children, primary, outline, circle, ...rest }) {
   return (
     <button
       className={`${styles.button} ${primary ? styles.primary : ""} ${
-        outline ? styles.outline : ""
-      }`}
+        outline ? styles.outline : ""} ${circle ? styles.circle : ""}`}
       {...rest}
     >
       {children}
