@@ -1,0 +1,17 @@
+---
+interface Props {
+  type: 'primary' | 'outline';
+  full?: boolean;
+}
+
+const { type, full } = Astro.props;
+
+const typeButton = {
+  primary: 'bg-[#1251B5] text-white border-[#1251B5]',
+  outline: 'bg-[#0000000a] backdrop-blur-md text-white border-[#ffffff31]',
+};
+---
+
+<button class=`text-sm py-2 px-4 border rounded-lg active:scale-95 flex gap-2 items-center justify-center ${typeButton[type]} ${full ? 'w-full' : 'max-w-max'}`>
+  <slot></slot>
+</button>
