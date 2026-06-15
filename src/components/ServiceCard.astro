@@ -1,23 +1,61 @@
 ---
-import Button from "./Button.astro";
-
 interface Props {
   title: string;
   description: string;
   image: string;
+  tags?: string[];
+  accent?: string;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, tags = [], accent = "#1251B5" } = Astro.props;
 ---
 
-<div class="flex justify-between mt-24 p-8 border border-[#ffffff25] rounded-xl text-[#ffffffb9]">
-  <div class="flex flex-col justify-between w-[60%]">
-    <h2 class="text-4xl">{title}</h2>
-    <p>{description}</p>
+<div class="service-card group relative flex flex-col overflow-hidden rounded-2xl border border-[#ffffff12] bg-gradient-to-br from-[#ffffff06] to-[#ffffff02] hover:border-[#1251B5]/50 transition-all duration-500 cursor-pointer h-full">
+
+  <!-- Top image zone -->
+  <div class="relative h-52 bg-gradient-to-br from-[#1251B5]/10 to-[#0a0f1a] overflow-hidden flex items-end justify-center">
+    <!-- Glow behind image -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#111823] via-transparent to-transparent z-10"></div>
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full opacity-20 blur-3xl group-hover:opacity-40 transition-opacity duration-700"
+      style={`background: ${accent}`}
+    ></div>
+    <img
+      src={image}
+      alt={title}
+      class="relative z-0 h-48 object-contain object-bottom group-hover:scale-105 transition-transform duration-700 drop-shadow-2xl"
+    />
   </div>
-  
-  <div class="flex flex-col w-[30%]">
-    <img src={image} alt={title} class="-mt-24 mb-14 w-full">
-    <Button full type="outline">Ver más <i class="ph ph-arrow-right text-2xl" id="icon"></i></Button>
+
+  <!-- Content -->
+  <div class="flex flex-col gap-4 p-7 flex-1">
+    <h3 class="text-2xl font-bold text-white group-hover:text-[#5b8dee] transition-colors duration-300">
+      {title}
+    </h3>
+    <p class="text-[#ffffff65] text-sm leading-relaxed flex-1">{description}</p>
+
+    <!-- Tags -->
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-1">
+        {tags.map(tag => (
+          <span class="text-xs px-2.5 py-1 rounded-full bg-[#1251B5]/10 text-[#5b8dee] border border-[#1251B5]/20">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <!-- CTA row -->
+    <div class="flex items-center justify-between mt-2 pt-4 border-t border-[#ffffff08]">
+      <span class="text-xs text-[#ffffff40] font-light">Explorar servicio</span>
+      <div class="w-9 h-9 rounded-full bg-[#1251B5]/10 border border-[#1251B5]/25 flex items-center justify-center group-hover:bg-[#1251B5] group-hover:border-[#1251B5] transition-all duration-300">
+        <i class="ph ph-arrow-right text-base text-[#5b8dee] group-hover:text-white transition-colors duration-300"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hover glow border effect -->
+  <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+    style="background: linear-gradient(135deg, rgba(18,81,181,0.05), transparent 60%);">
   </div>
 </div>

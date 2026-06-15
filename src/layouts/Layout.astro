@@ -7,17 +7,22 @@ import Header from '../components/Header.astro';
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = 'GSA — Consultoría de desarrollo de software a la medida. Convertimos ideas en soluciones digitales de alto impacto.' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
 		<link rel="icon" type="image/svg+xml" href="/gsa.svg" />
 		<script src="https://unpkg.com/@phosphor-icons/web"></script>
 		<meta name="generator" content={Astro.generator} />
@@ -25,7 +30,6 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<Header />
-
 		<slot />
 	</body>
 </html>
@@ -41,5 +45,24 @@ const { title } = Astro.props;
 		max-width: 1200px;
 		padding: 0 2rem;
 		margin: 0 auto;
+		overflow-x: hidden;
+	}
+	* {
+		box-sizing: border-box;
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+	::-webkit-scrollbar-track {
+		background: #111823;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #1251B5;
+		border-radius: 3px;
 	}
 </style>

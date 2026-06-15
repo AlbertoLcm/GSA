@@ -1,0 +1,24 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const { number, title, description, icon } = Astro.props;
+---
+
+<div class="process-step relative flex flex-col gap-4 p-8 rounded-2xl border border-[#ffffff15] bg-[#ffffff05] backdrop-blur-sm group hover:border-[#1251B5]/50 transition-all duration-500">
+  <div class="flex items-center gap-4">
+    <span class="text-6xl font-extrabold text-[#1251B5]/20 leading-none select-none group-hover:text-[#1251B5]/40 transition-all duration-500">
+      {number}
+    </span>
+    <div class="w-12 h-12 rounded-xl bg-[#1251B5]/10 border border-[#1251B5]/20 flex items-center justify-center group-hover:bg-[#1251B5]/20 transition-all duration-500">
+      <i class={`ph ${icon} text-2xl text-[#5b8dee]`}></i>
+    </div>
+  </div>
+  <h3 class="text-xl font-bold text-white">{title}</h3>
+  <p class="text-[#ffffff70] text-sm leading-relaxed">{description}</p>
+  <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#1251B5]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+</div>
