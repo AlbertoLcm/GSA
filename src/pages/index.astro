@@ -3,131 +3,567 @@ import Badge from "../components/Badge.astro";
 import Button from "../components/Button.astro";
 import Layout from "../layouts/Layout.astro";
 import PointsSVG from "../components/PointsSVG.astro";
-// import function to register Swiper custom elements
-import { register } from "swiper/element/bundle";
-// register Swiper custom elements
-register();
-
 import ServiceCard from "../components/ServiceCard.astro";
+import ProcessStep from "../components/ProcessStep.astro";
+import StatCard from "../components/StatCard.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import BenefitCard from "../components/BenefitCard.astro";
 
 const services = [
   {
-    title: "Web Sites",
-    description: "Desarrollamos sitios web con un diseño único y atractivo a medida de tus necesidades.",
+    title: "Sitios Web",
+    description: "Desarrollamos sitios web rápidos, modernos y con diseño único. Desde portales corporativos hasta plataformas de e-commerce a escala.",
     image: "./service-1.png",
+    tags: ["Next.js", "React", "CMS", "SEO"],
+    accent: "#1251B5",
   },
   {
     title: "Landing Pages",
-    description: "Creamos landing pages para promocionar tus productos o servicios de forma efectiva.",
+    description: "Páginas de conversión diseñadas estratégicamente para maximizar leads y ventas. Cada elemento optimizado para resultados.",
     image: "./service-2.png",
+    tags: ["Diseño UX", "A/B Testing", "Analytics"],
+    accent: "#4f46e5",
   },
   {
-    title: "Aplicaciones",
-    description: "Desarrollamos aplicaciones móviles y web profesionales que cumplen con tus expectativas.",
+    title: "Apps Móviles & Web",
+    description: "Aplicaciones nativas y multiplataforma que ofrecen experiencias fluidas en iOS, Android y web. Escalables desde el primer día.",
     image: "./service-3.png",
+    tags: ["React Native", "Flutter", "PWA"],
+    accent: "#0ea5e9",
   },
   {
-    title: "Personalizado",
-    description: "¿Necesitas algo diferente? No te preocupes, con nuestro servicio personalizado lo hacemos realidad.",
+    title: "Software a Medida",
+    description: "Sistemas empresariales, APIs, automatizaciones y flujos de trabajo diseñados exactamente para tu operación. Sin compromisos.",
     image: "./service-4.png",
+    tags: ["Node.js", "Python", "PostgreSQL", "AWS"],
+    accent: "#8b5cf6",
+  },
+];
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Análisis & Descubrimiento",
+    description: "Entendemos a fondo tus necesidades, objetivos y contexto de negocio para diseñar la solución perfecta.",
+    icon: "ph-magnifying-glass",
+  },
+  {
+    number: "02",
+    title: "Diseño & Prototipado",
+    description: "Creamos wireframes y prototipos interactivos para que puedas visualizar el resultado antes de escribir una sola línea de código.",
+    icon: "ph-figma-logo",
+  },
+  {
+    number: "03",
+    title: "Desarrollo Ágil",
+    description: "Construimos tu solución con metodologías ágiles, entregando valor en cada sprint y manteniendo comunicación constante.",
+    icon: "ph-code",
+  },
+  {
+    number: "04",
+    title: "Pruebas & Calidad",
+    description: "Realizamos pruebas exhaustivas de funcionalidad, rendimiento y seguridad para garantizar un producto sin fallas.",
+    icon: "ph-test-tube",
+  },
+  {
+    number: "05",
+    title: "Lanzamiento",
+    description: "Desplegamos tu proyecto en producción con los más altos estándares, asegurándonos de que todo funcione perfectamente.",
+    icon: "ph-rocket-launch",
+  },
+  {
+    number: "06",
+    title: "Soporte Continuo",
+    description: "Ofrecemos mantenimiento y soporte post-lanzamiento para que tu solución evolucione junto con tu negocio.",
+    icon: "ph-headset",
+  },
+];
+
+const stats = [
+  { value: "50", suffix: "+", label: "Proyectos entregados" },
+  { value: "98", suffix: "%", label: "Clientes satisfechos" },
+  { value: "5", suffix: "+", label: "Años de experiencia" },
+  { value: "24/7", suffix: "", label: "Soporte disponible" },
+];
+
+const benefits = [
+  {
+    icon: "ph-target",
+    title: "Soluciones a Medida",
+    description: "Cada proyecto es único. Diseñamos y desarrollamos exactamente lo que tu negocio necesita, sin plantillas genéricas.",
+  },
+  {
+    icon: "ph-lightning",
+    title: "Entrega Rápida",
+    description: "Metodologías ágiles que nos permiten entregar resultados reales en tiempos competitivos sin sacrificar calidad.",
+  },
+  {
+    icon: "ph-shield-check",
+    title: "Tecnología de Punta",
+    description: "Utilizamos las últimas tecnologías del mercado para construir soluciones robustas, escalables y seguras.",
+  },
+  {
+    icon: "ph-users-three",
+    title: "Equipo Dedicado",
+    description: "Un equipo multidisciplinario comprometido con tu proyecto, disponible para resolver dudas y dar seguimiento puntual.",
+  },
+  {
+    icon: "ph-chart-line-up",
+    title: "Orientados a Resultados",
+    description: "No solo entregamos código. Entregamos soluciones que generan impacto real y valor medible en tu negocio.",
+  },
+  {
+    icon: "ph-lock-key",
+    title: "Código en Propiedad",
+    description: "Todo el código desarrollado es tuyo. Transparencia total, sin dependencias forzadas ni costos ocultos.",
+  },
+];
+
+const testimonials = [
+  {
+    quote: "GSA transformó completamente nuestra operación. La aplicación que desarrollaron redujo nuestros tiempos de gestión en un 70%. Excelente equipo, muy profesional y siempre atentos.",
+    author: "Carlos Mendoza",
+    role: "CEO",
+    company: "LogiTech Solutions",
+    initial: "C",
+    rating: 5,
+  },
+  {
+    quote: "El sitio web que nos construyeron superó todas nuestras expectativas. El diseño es moderno, carga rápido y nuestras ventas en línea aumentaron un 45% en el primer mes.",
+    author: "Ana Reyes",
+    role: "Directora de Marketing",
+    company: "Boutique Élite",
+    initial: "A",
+    rating: 5,
+  },
+  {
+    quote: "Profesionalismo total desde el primer día. Cumplieron cada entrega a tiempo y el soporte post-lanzamiento ha sido impecable. Sin duda los recomendaría.",
+    author: "Roberto Silva",
+    role: "Fundador",
+    company: "MediConnect",
+    initial: "R",
+    rating: 5,
   },
 ];
 ---
 
-<Layout
-  title="GSA | Web Sites, Landing Pages y Aplicaciones. Contáctanos ahora"
->
+<Layout title="GSA | Consultoría de Desarrollo de Software a Medida">
   <main>
-    <section class="pt-8 pb-14 mb-40 relative">
+
+    <!-- ─── HERO ─────────────────────────────────────────── -->
+    <section class="pt-10 pb-8 mb-32 relative min-h-[88vh] flex items-center">
       <PointsSVG />
 
-      <div class="flex flex-col gap-5 w-[600px]">
-        <h1 class="font-extrabold text-8xl max-lg:text-7xl">
-          Diseño, <br /><span class="font-extralight">Desarrollo &</span> Solucioness
-        </h1>
-        <p class="text-lg text-[#ffffffa2]">
-          Soluciones tecnológicas para empresas, negocios y personas.
-        </p>
+      <!-- Background glow blobs -->
+      <div class="absolute -left-32 top-20 w-96 h-96 bg-[#1251B5]/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute left-64 top-40 w-64 h-64 bg-[#4f46e5]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col gap-7 max-w-[620px] max-lg:w-full relative z-10">
+
+        <!-- Status badge -->
         <Badge>Disponibles en este momento</Badge>
-        <Button type="primary"
-          >Solicitar un Presupuesto <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="#fff"
-            viewBox="0 0 256 256"
-            ><path
-              d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm29.66,109.66-40,40a8,8,0,0,1-11.32-11.32L140.69,128,106.34,93.66a8,8,0,0,1,11.32-11.32l40,40A8,8,0,0,1,157.66,133.66Z"
-            ></path></svg
-          ></Button
-        >
+
+        <!-- Main headline -->
+        <h1 class="font-extrabold leading-[1.03] tracking-tight">
+          <span class="block text-[5.5rem] max-lg:text-6xl max-sm:text-5xl text-white">Diseño,</span>
+          <span class="block text-[5.5rem] max-lg:text-6xl max-sm:text-5xl">
+            <span class="font-extralight text-[#ffffff60]">Desarrollo</span>
+            <span class="text-white"> &amp;</span>
+          </span>
+          <span class="block text-[5.5rem] max-lg:text-6xl max-sm:text-5xl bg-gradient-to-r from-[#5b8dee] via-[#7b9ff7] to-[#1251B5] bg-clip-text text-transparent pb-2">
+            Soluciones
+          </span>
+        </h1>
+
+        <!-- Description -->
+        <p class="text-lg text-[#ffffff90] leading-relaxed max-w-md">
+          Convertimos tus ideas en <strong class="text-white font-semibold">software a medida</strong>. Tecnología de vanguardia para empresas que quieren crecer sin límites.
+        </p>
+
+        <!-- Tech stack chips -->
+        <div class="flex flex-wrap gap-2">
+          {["React", "Node.js", "Flutter", "Next.js", "AWS", "Python"].map(tech => (
+            <span class="text-xs px-3 py-1.5 rounded-full border border-[#ffffff15] bg-[#ffffff05] text-[#ffffff70] hover:border-[#1251B5]/60 hover:text-[#5b8dee] transition-colors duration-200 cursor-default">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex gap-3 flex-wrap items-center">
+          <Button type="primary">
+            Solicitar Presupuesto
+            <i class="ph ph-paper-plane-right text-lg"></i>
+          </Button>
+          <Button type="outline">
+            Ver Portafolio
+            <i class="ph ph-arrow-right text-lg"></i>
+          </Button>
+        </div>
+
+        <!-- Trust line -->
+        <div class="flex items-center gap-3 mt-1">
+          <div class="flex -space-x-2">
+            {["C", "A", "R", "M"].map(initial => (
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#1251B5] to-[#5b8dee] border-2 border-[#111823] flex items-center justify-center text-xs font-bold text-white">
+                {initial}
+              </div>
+            ))}
+          </div>
+          <div>
+            <div class="flex gap-0.5 mb-0.5">
+              {[1,2,3,4,5].map(() => (
+                <i class="ph ph-star-fill text-[#F5A623] text-xs"></i>
+              ))}
+            </div>
+            <p class="text-xs text-[#ffffff50]">+50 clientes satisfechos en LATAM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <a href="#servicios" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#ffffff30] hover:text-[#5b8dee] transition-colors duration-300 max-lg:hidden">
+        <span class="text-xs tracking-widest uppercase">Explorar</span>
+        <div class="w-px h-12 bg-gradient-to-b from-[#ffffff30] to-transparent"></div>
+      </a>
+    </section>
+
+    <img src="./hero.png" alt="apps mockup" class="absolute right-0 top-0 h-[105vh] max-lg:hidden opacity-90" />
+    <img src="./gradient.png" alt="" class="absolute left-0 top-28 select-none pointer-events-none max-lg:hidden opacity-80" />
+
+    <!-- ─── STATS ──────────────────────────────────────────── -->
+    <section class="mb-24 relative z-10">
+      <div class="grid grid-cols-4 max-lg:grid-cols-2 gap-4">
+        {stats.map((stat) => (
+          <StatCard {...stat} />
+        ))}
       </div>
     </section>
 
-    <img src="./hero.png" alt="apps" class="absolute right-0 top-0 h-[120vh]" />
-    <img src="./gradient.png" class="absolute left-0 top-28 select-none">
-
-    <section class="mb-10 relative">
-      
-      <h2 class="font-extrabold text-7xl max-lg:text-7xl text-center">
-        Nuestros Servicios
-      </h2>
-      <p class="text-center mt-6 text-[#ffffffa2] w-3/6 mx-auto">
-        Ofrecemos una amplia gama de servicios tecnológicos para satisfacer
-        todas tus necesidades
-      </p>
-
-      <div class="flex justify-center gap-2 mt-8">
-        <button
-          id="prev"
-          class="rounded-full border border-[#ffffff41] w-14 h-14 flex justify-center items-center cursor-pointer active:scale-95"
-        >
-          <i class="ph ph-caret-left text-4xl text-[#ffffff79]"></i>
-        </button>
-
-        <button
-          id="next"
-          class="rounded-full border border-[#ffffff41] w-14 h-14 flex justify-center items-center cursor-pointer active:scale-95"
-        >
-          <i class="ph ph-caret-right text-4xl text-[#ffffff79]"></i>
-        </button>
+    <!-- ─── SERVICIOS ─────────────────────────────────────── -->
+    <section id="servicios" class="mb-28 relative">
+      <!-- Section header -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="text-[#5b8dee] text-sm font-semibold tracking-widest uppercase mb-3 block">Lo que hacemos</span>
+          <h2 class="font-extrabold text-6xl max-lg:text-5xl leading-tight">
+            Nuestros<br />Servicios
+          </h2>
+        </div>
+        <p class="text-[#ffffffa2] max-w-sm lg:text-right mb-1">
+          Soluciones digitales completas, desde la idea hasta el lanzamiento y más allá.
+        </p>
       </div>
 
-      <swiper-container
-        class="h-full"
-        space-between="30"
-        slides-per-view="2"
-        slides-per-group="2"
-        loop="true"
-      >
-        {
-          services.map((service) => (
-            <swiper-slide>
-              <ServiceCard {...service} />
-            </swiper-slide>
-          ))
-        }
-      </swiper-container>
+      <!-- Services 2x2 grid -->
+      <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-6">
+        {services.map((service) => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+
+      <!-- Bottom CTA bar -->
+      <div class="mt-10 flex items-center justify-between p-6 rounded-2xl border border-[#ffffff10] bg-[#ffffff04]">
+        <div>
+          <p class="text-white font-semibold">¿No encuentras lo que buscas?</p>
+          <p class="text-sm text-[#ffffff50] mt-0.5">Cuéntanos tu proyecto, lo hacemos posible.</p>
+        </div>
+        <Button type="outline">
+          Servicio Personalizado
+          <i class="ph ph-sparkle text-lg"></i>
+        </Button>
+      </div>
     </section>
 
-    <section>
+    <!-- ─── PROCESO ───────────────────────────────────────── -->
+    <section id="proceso" class="mb-28">
+      <div class="text-center mb-14">
+        <span class="text-[#5b8dee] text-sm font-semibold tracking-widest uppercase mb-3 block">Metodología</span>
+        <h2 class="font-extrabold text-6xl max-lg:text-5xl">
+          Cómo Trabajamos
+        </h2>
+        <p class="mt-5 text-[#ffffffa2] max-w-xl mx-auto text-center">
+          Un proceso claro, transparente y orientado a resultados para garantizar el éxito de tu proyecto.
+        </p>
+      </div>
 
+      <div class="grid grid-cols-3 max-lg:grid-cols-1 gap-5">
+        {processSteps.map((step) => (
+          <ProcessStep {...step} />
+        ))}
+      </div>
     </section>
+
+    <!-- ─── POR QUÉ ELEGIRNOS ─────────────────────────────── -->
+    <section class="mb-28">
+      <div class="flex flex-col lg:flex-row gap-16 items-center">
+        <!-- Left text -->
+        <div class="lg:w-2/5 flex-shrink-0">
+          <span class="text-[#5b8dee] text-sm font-semibold tracking-widest uppercase mb-3 block">Nuestra ventaja</span>
+          <h2 class="font-extrabold text-5xl max-lg:text-4xl leading-tight mb-6">
+            ¿Por qué elegir <span class="text-[#1251B5]">GSA</span>?
+          </h2>
+          <p class="text-[#ffffffa2] leading-relaxed mb-8">
+            Somos más que una agencia de desarrollo. Somos tus socios tecnológicos. Nos involucramos profundamente en tu negocio para diseñar la solución que realmente necesitas, no la que es más fácil de construir.
+          </p>
+          <Button type="primary">
+            Agendar una Llamada
+            <i class="ph ph-phone text-lg"></i>
+          </Button>
+        </div>
+
+        <!-- Right grid -->
+        <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-4 flex-1">
+          {benefits.map((benefit) => (
+            <BenefitCard {...benefit} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIOS ───────────────────────────────────── -->
+    <section id="testimonios" class="mb-28">
+      <div class="text-center mb-14">
+        <span class="text-[#5b8dee] text-sm font-semibold tracking-widest uppercase mb-3 block">Clientes</span>
+        <h2 class="font-extrabold text-6xl max-lg:text-5xl">
+          Lo que dicen de nosotros
+        </h2>
+        <p class="mt-5 text-[#ffffffa2] max-w-xl mx-auto">
+          La satisfacción de nuestros clientes es la mejor medida de nuestro trabajo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 max-lg:grid-cols-1 gap-6">
+        {testimonials.map((testimonial) => (
+          <TestimonialCard {...testimonial} />
+        ))}
+      </div>
+    </section>
+
+    <!-- ─── CTA FINAL ─────────────────────────────────────── -->
+    <section id="contacto" class="mb-16">
+      <div class="relative rounded-3xl overflow-hidden p-16 max-lg:p-10 border border-[#1251B5]/30 bg-gradient-to-br from-[#1251B5]/15 via-[#111823] to-[#0a0f1a]">
+        <!-- Glow effects -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-[#1251B5]/20 blur-3xl rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-[#5b8dee]/10 blur-3xl rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col lg:flex-row items-center gap-10 text-center lg:text-left">
+          <div class="flex-1">
+            <h2 class="font-extrabold text-5xl max-lg:text-4xl leading-tight mb-4">
+              ¿Listo para llevar tu idea al siguiente nivel?
+            </h2>
+            <p class="text-[#ffffffa2] text-lg max-w-lg mx-auto lg:mx-0">
+              Cuéntanos tu proyecto y te ayudaremos a convertirlo en realidad. Primera consulta sin costo.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+            <Button type="primary">
+              Solicitar Presupuesto
+              <i class="ph ph-paper-plane-right text-lg"></i>
+            </Button>
+            <Button type="outline">
+              Ver Portafolio
+              <i class="ph ph-briefcase text-lg"></i>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ────────────────────────────────────────── -->
+    <footer class="border-t border-[#ffffff10] pt-14 pb-8 mt-8">
+      <div class="grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="col-span-1 flex flex-col gap-4">
+          <!-- Logo inline SVG -->
+          <svg width="90" height="auto" viewBox="0 0 150 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M33.3223 17.5328C33.1064 16.6528 32.7661 15.8808 32.3012 15.2167C31.8363 14.536 31.2552 13.9631 30.5578 13.4983C29.8771 13.0168 29.0802 12.6598 28.167 12.4273C27.2705 12.1783 26.2826 12.0538 25.2034 12.0538C22.879 12.0538 20.8949 12.61 19.2512 13.7224C17.6241 14.8348 16.3789 16.437 15.5155 18.529C14.6688 20.621 14.2454 23.1446 14.2454 26.1C14.2454 29.0885 14.6522 31.6454 15.4657 33.7706C16.2793 35.8957 17.4913 37.5229 19.1018 38.6518C20.7123 39.7807 22.7129 40.3452 25.1038 40.3452C27.2124 40.3452 28.964 40.0382 30.3586 39.4238C31.7699 38.8096 32.8242 37.9379 33.5215 36.8089C34.2188 35.6799 34.5675 34.3516 34.5675 32.8242L36.9583 33.0732H25.303V23.211H47.9163V30.2839C47.9163 34.9328 46.9286 38.9091 44.9529 42.2131C42.9935 45.5007 40.2872 48.0242 36.8338 49.7841C33.397 51.5277 29.4538 52.3992 25.0042 52.3992C20.0399 52.3992 15.6815 51.3449 11.9293 49.2363C8.17701 47.1277 5.24654 44.1226 3.13797 40.221C1.04599 36.3191 0 31.6786 0 26.2992C0 22.082 0.639216 18.3463 1.91765 15.0921C3.21269 11.838 5.00579 9.09016 7.29702 6.84876C9.58824 4.59074 12.2364 2.88893 15.2416 1.74332C18.2467 0.581107 21.4677 0 24.9045 0C27.9263 0 30.7322 0.43168 33.3223 1.29504C35.9289 2.14179 38.2284 3.35381 40.221 4.93111C42.2298 6.4918 43.8487 8.34303 45.0771 10.4848C46.306 12.6266 47.0529 14.9759 47.3186 17.5328H33.3223ZM81.8676 16.6362C81.7347 14.9759 81.1121 13.6809 79.9997 12.7511C78.9038 11.8213 77.235 11.3565 74.9939 11.3565C73.566 11.3565 72.3956 11.5308 71.4823 11.8795C70.5858 12.2115 69.9215 12.6681 69.4898 13.2492C69.0581 13.8303 68.8341 14.4944 68.8173 15.2416C68.7842 15.8559 68.8921 16.4121 69.1411 16.9102C69.4068 17.3917 69.8218 17.8317 70.3863 18.2301C70.9509 18.612 71.6732 18.9607 72.553 19.2761C73.4331 19.5916 74.4793 19.8738 75.691 20.1229L79.8751 21.0194C82.6975 21.6171 85.1135 22.4058 87.1223 23.3853C89.1312 24.3649 90.775 25.5189 92.0533 26.8471C93.3317 28.1587 94.2699 29.6364 94.8676 31.2801C95.482 32.9238 95.7972 34.7169 95.8139 36.6595C95.7972 40.0133 94.9591 42.8524 93.2986 45.1769C91.6384 47.5014 89.2641 49.2694 86.176 50.4815C83.1042 51.6936 79.4103 52.2995 75.0933 52.2995C70.6602 52.2995 66.7917 51.6438 63.4878 50.3319C60.2005 49.0205 57.6435 47.003 55.8173 44.2804C54.0076 41.5406 53.0943 38.0375 53.0779 33.7706H66.2275C66.3105 35.3313 66.7005 36.6429 67.3979 37.7055C68.0954 38.7681 69.0749 39.5734 70.3364 40.1212C71.6152 40.669 73.1343 40.9429 74.8942 40.9429C76.372 40.9429 77.6087 40.7606 78.6049 40.3951C79.6012 40.03 80.3566 39.5235 80.8713 38.876C81.386 38.2285 81.6517 37.4896 81.6681 36.6595C81.6517 35.8791 81.3942 35.1984 80.8963 34.6173C80.4147 34.0196 79.6179 33.4883 78.5052 33.0234C77.3928 32.5419 75.8904 32.0936 73.9977 31.6786L68.9171 30.5828C64.401 29.6032 60.8395 27.9678 58.233 25.6766C55.6428 23.3687 54.3563 20.2225 54.3726 16.2378C54.3563 13.0002 55.2197 10.1694 56.9628 7.74531C58.7227 5.30467 61.1551 3.40362 64.26 2.04217C67.3812 0.680724 70.9591 0 74.9939 0C79.1114 0 82.6725 0.689027 85.6776 2.06708C88.6832 3.44513 90.999 5.3877 92.6261 7.89473C94.2699 10.3852 95.1002 13.299 95.1165 16.6362H81.8676ZM112.344 51.7018H97.4016L114.237 0.697329H133.165L150 51.7018H135.057L123.9 14.7435H123.502L112.344 51.7018ZM109.555 31.579H137.647V41.9392H109.555V31.579Z" fill="white"></path>
+          </svg>
+          <p class="text-[#ffffff50] text-sm leading-relaxed">
+            Consultoría de desarrollo de software a la medida. Transformamos ideas en soluciones digitales de alto impacto.
+          </p>
+          <div class="flex gap-3">
+            <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-[#ffffff15] flex items-center justify-center hover:border-[#1251B5] hover:bg-[#1251B5]/10 transition-all duration-300">
+              <i class="ph ph-linkedin-logo text-lg text-[#ffffff60]"></i>
+            </a>
+            <a href="#" aria-label="GitHub" class="w-10 h-10 rounded-full border border-[#ffffff15] flex items-center justify-center hover:border-[#1251B5] hover:bg-[#1251B5]/10 transition-all duration-300">
+              <i class="ph ph-github-logo text-lg text-[#ffffff60]"></i>
+            </a>
+            <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-[#ffffff15] flex items-center justify-center hover:border-[#1251B5] hover:bg-[#1251B5]/10 transition-all duration-300">
+              <i class="ph ph-instagram-logo text-lg text-[#ffffff60]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h4 class="text-white font-semibold mb-5 text-sm tracking-wide">Servicios</h4>
+          <ul class="flex flex-col gap-3">
+            {["Sitios Web", "Landing Pages", "Aplicaciones Móviles", "Sistemas a Medida", "Consultoría TI"].map(item => (
+              <li>
+                <a href="#" class="text-[#ffffff50] text-sm hover:text-white transition-colors duration-200 flex items-center gap-2 group">
+                  <i class="ph ph-caret-right text-xs text-[#1251B5] opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="text-white font-semibold mb-5 text-sm tracking-wide">Empresa</h4>
+          <ul class="flex flex-col gap-3">
+            {["Sobre Nosotros", "Portafolio", "Proceso de Trabajo", "Testimonios", "Blog"].map(item => (
+              <li>
+                <a href="#" class="text-[#ffffff50] text-sm hover:text-white transition-colors duration-200 flex items-center gap-2 group">
+                  <i class="ph ph-caret-right text-xs text-[#1251B5] opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-white font-semibold mb-5 text-sm tracking-wide">Contacto</h4>
+          <ul class="flex flex-col gap-3">
+            <li class="flex items-center gap-3 text-[#ffffff50] text-sm">
+              <i class="ph ph-envelope text-[#1251B5] text-base flex-shrink-0"></i>
+              contacto@gsa.dev
+            </li>
+            <li class="flex items-center gap-3 text-[#ffffff50] text-sm">
+              <i class="ph ph-phone text-[#1251B5] text-base flex-shrink-0"></i>
+              +52 (55) 1234-5678
+            </li>
+            <li class="flex items-center gap-3 text-[#ffffff50] text-sm">
+              <i class="ph ph-map-pin text-[#1251B5] text-base flex-shrink-0"></i>
+              Ciudad de México, MX
+            </li>
+            <li class="mt-4">
+              <a href="mailto:contacto@gsa.dev">
+                <Button type="outline">
+                  Escríbenos
+                  <i class="ph ph-paper-plane-right text-base"></i>
+                </Button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="border-t border-[#ffffff08] pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-[#ffffff30] text-xs">
+          © {new Date().getFullYear()} GSA. Todos los derechos reservados.
+        </p>
+        <div class="flex gap-6">
+          <a href="#" class="text-[#ffffff30] text-xs hover:text-white transition-colors">Privacidad</a>
+          <a href="#" class="text-[#ffffff30] text-xs hover:text-white transition-colors">Términos de Uso</a>
+          <a href="#" class="text-[#ffffff30] text-xs hover:text-white transition-colors">Cookies</a>
+        </div>
+      </div>
+    </footer>
+
   </main>
 </Layout>
-<script
-  src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
-></script>
-<script>
-  const swiperEl = document.querySelector("swiper-container");
-  const btnPrev = document.querySelector("#prev");
-  const btnNext = document.querySelector("#next");
 
-  btnNext?.addEventListener("click", () => {
-    swiperEl?.swiper.slideNext();
+<script>
+  // Scroll-triggered animations
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -40px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll(".stat-card, .process-step, .benefit-card, .testimonial-card, .service-card").forEach((el) => {
+    observer.observe(el);
   });
 
-  btnPrev?.addEventListener("click", () => {
-    swiperEl?.swiper.slidePrev();
+  // Hero words animate in on load
+  document.querySelectorAll(".hero-word").forEach((el, i) => {
+    (el as HTMLElement).style.animationDelay = `${i * 0.12}s`;
+    el.classList.add("hero-animate");
   });
 </script>
+
+<style is:global>
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hero entrance animation */
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .hero-animate {
+    animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Fade-in animations triggered by IntersectionObserver */
+  .stat-card,
+  .process-step,
+  .benefit-card,
+  .testimonial-card,
+  .service-card {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  .stat-card.in-view,
+  .process-step.in-view,
+  .benefit-card.in-view,
+  .testimonial-card.in-view,
+  .service-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children */
+  .stat-card:nth-child(2) { transition-delay: 0.1s; }
+  .stat-card:nth-child(3) { transition-delay: 0.2s; }
+  .stat-card:nth-child(4) { transition-delay: 0.3s; }
+
+  .service-card:nth-child(2) { transition-delay: 0.1s; }
+  .service-card:nth-child(3) { transition-delay: 0.15s; }
+  .service-card:nth-child(4) { transition-delay: 0.25s; }
+
+  .process-step:nth-child(2) { transition-delay: 0.1s; }
+  .process-step:nth-child(3) { transition-delay: 0.2s; }
+  .process-step:nth-child(4) { transition-delay: 0.1s; }
+  .process-step:nth-child(5) { transition-delay: 0.2s; }
+  .process-step:nth-child(6) { transition-delay: 0.3s; }
+
+  .benefit-card:nth-child(2) { transition-delay: 0.1s; }
+  .benefit-card:nth-child(3) { transition-delay: 0.2s; }
+  .benefit-card:nth-child(4) { transition-delay: 0.1s; }
+  .benefit-card:nth-child(5) { transition-delay: 0.2s; }
+  .benefit-card:nth-child(6) { transition-delay: 0.3s; }
+
+  .testimonial-card:nth-child(2) { transition-delay: 0.15s; }
+  .testimonial-card:nth-child(3) { transition-delay: 0.3s; }
+</style>

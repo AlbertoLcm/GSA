@@ -1,0 +1,38 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  initial: string;
+  rating?: number;
+}
+
+const { quote, author, role, company, initial, rating = 5 } = Astro.props;
+---
+
+<div class="testimonial-card p-8 rounded-2xl border border-[#ffffff15] bg-[#ffffff05] backdrop-blur-sm flex flex-col gap-6 h-full group hover:border-[#1251B5]/40 transition-all duration-500 relative overflow-hidden">
+  <!-- Quote mark decorative -->
+  <div class="absolute top-4 right-6 text-8xl text-[#1251B5]/10 font-serif leading-none select-none group-hover:text-[#1251B5]/20 transition-all duration-500">"</div>
+
+  <!-- Rating stars -->
+  <div class="flex gap-1">
+    {Array.from({ length: rating }).map(() => (
+      <i class="ph ph-star-fill text-[#F5A623] text-sm"></i>
+    ))}
+  </div>
+
+  <!-- Quote -->
+  <p class="text-[#ffffffc0] text-sm leading-relaxed italic relative z-10">"{quote}"</p>
+
+  <!-- Author -->
+  <div class="flex items-center gap-4 mt-auto">
+    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#1251B5] to-[#5b8dee] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+      {initial}
+    </div>
+    <div>
+      <p class="text-white font-semibold text-sm">{author}</p>
+      <p class="text-[#ffffff50] text-xs">{role} · {company}</p>
+    </div>
+  </div>
+</div>

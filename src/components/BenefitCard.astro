@@ -1,0 +1,17 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+---
+
+<div class="benefit-card flex flex-col gap-4 p-7 rounded-2xl border border-[#ffffff10] bg-[#ffffff04] group hover:border-[#1251B5]/50 hover:bg-[#1251B5]/5 transition-all duration-500">
+  <div class="w-14 h-14 rounded-2xl bg-[#1251B5]/10 border border-[#1251B5]/20 flex items-center justify-center group-hover:bg-[#1251B5]/20 group-hover:scale-110 transition-all duration-500">
+    <i class={`ph ${icon} text-3xl text-[#5b8dee]`}></i>
+  </div>
+  <h3 class="text-lg font-bold text-white">{title}</h3>
+  <p class="text-[#ffffff65] text-sm leading-relaxed">{description}</p>
+</div>
